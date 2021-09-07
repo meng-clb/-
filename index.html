@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>日期计算</title>
+        <title>Document</title>
         <style>
             * {
                 margin: 0;
@@ -34,12 +34,12 @@
                 display: inline-block;
                 width: 6em;
                 height: 3em;
-                color: #e24b4bfb;
-                background-color: #a7d6df;
                 padding: 2px;
                 margin-left: 10px;
                 border-radius: 1em;
                 border: 1px solid pink;
+                color: #e24b4bfb;
+                background-color: #a7d6df;
             }
 
             input {
@@ -54,10 +54,16 @@
     </head>
 
     <body>
-        <!-- 输入生产日期, 用当前日期减生产日期, 得出一共过了多少天 -->
+        <!-- 输入生产日期, 用当前日期减生产日期, 得出一共过了多少天
+        判断过了的天数是否等于保质期 -->
         <h2>请输入生产日期:</h2>
         <div>
-            <input type="text" id="production" value="yyyy-mm-dd" class="fontColor" />
+            <input
+                type="text"
+                id="production"
+                value="yyyy-mm-dd"
+                class="fontColor"
+            />
             <button id="count">❥(^_-)</button>
         </div>
 
@@ -94,7 +100,13 @@
                     // 获取输入的生产日期
                     let proDate = +new Date(production.value);
                     let date = getDate(nowDate, proDate);
-                    alert(date);
+                    if (date > 0) {
+                        alert(`未过期, 还剩${date}天过期!`);
+                    } else if (date == 0) {
+                        alert(`今天过期, 剩余${date}天`);
+                    } else {
+                        alert(`已经过期${Math.abs(date)}天`);
+                    }
                 }
             });
 
@@ -109,7 +121,13 @@
                     // 获取输入的生产日期
                     let proDate = +new Date(production.value);
                     let date = getDate(nowDate, proDate);
-                    alert(date);
+                    if (date > 0) {
+                        alert(`未过期, 还剩${date}天过期!`);
+                    } else if (date == 0) {
+                        alert(`今天过期, 剩余${date}天`);
+                    } else {
+                        alert(`已经过期${Math.abs(date)}天`);
+                    }
                 }
             });
         </script>
