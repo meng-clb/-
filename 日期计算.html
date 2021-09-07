@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background: url(./bz.jpg) no-repeat center;
+            }
+
+            h2 {
+                text-align: center;
+                margin-top: 2em;
+                color: #afdf2d;
+            }
+
+            div {
+                margin-top: 3em;
+                text-align: center;
+            }
+
+            .fontColor {
+                color: #ccc;
+            }
+
+            button {
+                display: inline-block;
+                width: 6em;
+                height: 3em;
+                color: #e24b4bfb;
+                background-color: #a7d6df;
+                padding: 2px;
+                margin-left: 10px;
+                border-radius: 1em;
+                border: 1px solid pink;
+            }
+
+            input {
+                outline: none;
+                width: 20em;
+                height: 2em;
+                border: 1px solid pink;
+                border-radius: 1em;
+                padding: 5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 输入生产日期, 用当前日期减生产日期, 得出一共过了多少天
+        判断过了的天数是否等于保质期 -->
+        <h2>请输入生产日期:</h2>
+        <div>
+            <input type="text" id="production" value="yyyy-mm-dd" />
+            <button id="count">❥(^_-)</button>
+        </div>
+
+        <script>
+            let nowDate = +new Date();
+            let production = document.querySelector("#production");
+            let count = document.querySelector("#count");
+            // console.log(production.value);
+
+            // 获取过了多少天;
+            function getDate(now, past) {
+                if (past == "yyyy-mm-dd") {
+                    alert("格式错误");
+                } else {
+                    passDate = (now - past) / 1000 / 60 / 60 / 24;
+                    return parseInt(passDate);
+                }
+            }
+
+            // 获得焦点
+            production.addEventListener("focus", function () {
+                this.classList.remove("fontColor");
+                if (this.value == "yyyy-mm-dd") {
+                    this.value = "";
+                }
+            });
+
+            // 失去焦点
+            production.addEventListener("blur", function () {
+                this.classList.add("fontColor");
+                if (this.value == "") {
+                    this.value = "yyyy-mm-dd";
+                } else {
+                    // 获取输入的生产日期
+                    let proDate = +new Date(production.value);
+                    let date = getDate(nowDate, proDate);
+                    alert(date);
+                }
+            });
+
+            // 点击事件
+            count.addEventListener("click", function () {
+                production.classList.add("fontColor");
+                if (production.value == "") {
+                    production.value = "yyyy-mm-dd";
+                } else if (production.value == "yyyy-mm-dd") {
+                    alert("请输入生产日期");
+                } else {
+                    // 获取输入的生产日期
+                    let proDate = +new Date(production.value);
+                    let date = getDate(nowDate, proDate);
+                    alert(date);
+                }
+            });
+        </script>
+    </body>
+</html>
